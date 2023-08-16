@@ -22,6 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Getter
@@ -47,7 +48,7 @@ public class Schedule {
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "times")
-    private List<String> times;
+    private List<LocalTime> times;
     @Column(name = "services")
     private List<String> services;
     @Column(name = "status")

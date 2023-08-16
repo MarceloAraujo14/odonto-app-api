@@ -5,6 +5,7 @@ import br.com.odontoapp.schedule.core.enums.ServiceType;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -16,7 +17,7 @@ public class ScheduleResponse {
     private String customerName;
     private String customerPhone;
     private String date;
-    private String beginAt;
+    private LocalTime beginAt;
     private int duration;
     private List<ServiceType> services;
     private ScheduleStatus status;

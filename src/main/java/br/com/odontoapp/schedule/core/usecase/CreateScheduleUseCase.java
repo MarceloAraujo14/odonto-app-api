@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class CreateScheduleUseCase {
@@ -25,20 +26,20 @@ public class CreateScheduleUseCase {
     private final ScheduleDateTimeRepository dateTimeRepository;
     private final Loggr log = new Loggr(CreateScheduleUseCase.class.getName());
 
-    @Transactional
     public Schedule execute(Schedule schedule){
         log.state(ProcessState.NEW).m("execute").param("schedule", schedule).info();
         validate(schedule);
         schedule.setStatus(ScheduleStatus.AGENDADO);
         updateDateTime(schedule);
-        log.state(ProcessState.SUCCESS).info();
-        return scheduleRepository.save(schedule);
+        Schedule scheduleSaved = scheduleRepository.save(schedule);
+        log.event().state(ProcessState.SUCCESS).m("execute").param("scheduleSaved", scheduleSaved).info();
+        return scheduleSaved;
     }
 
     private void validate(Schedule schedule){
         validateDate(schedule.getDate());
-        validateAfterNow(schedule.getDate(), LocalTime.parse(schedule.getTimes().get(0)));
         validateTime(schedule.getTimes());
+        validateAfterNow(schedule.getDate(), schedule.getTimes().get(0));
         validateOverlapTime(schedule.getDate(), schedule.getTimes());
     }
 
@@ -52,21 +53,24 @@ public class CreateScheduleUseCase {
 
     private void validateAfterNow(LocalDate date, LocalTime beginAt){
         log.event().state(ProcessState.PROCESSING).m("validateAfterNow").param("date", date).param("beginAt", beginAt).info();
-        if(date.atTime(beginAt).isAfter(LocalDateTime.now().plusHours(1))){
+        if(date.atTime(beginAt).isBefore(LocalDateTime.now().plusHours(1))){
             throw new IllegalArgumentException("Não é possível agendar horários com menos de 1 hora de antecedência.");
         }
     }
 
-    private void validateTime(List<String> times){
+    private void validateTime(List<LocalTime> times){
         log.event().state(ProcessState.PROCESSING).m("validateTime").param("times", times).info();
+
+        if(times.isEmpty()) throw new IllegalArgumentException("Escolha pelo menos um horário para agendar.");
+
         times.forEach(time -> {
-            if(!ScheduleConstants.TIME_BLOCK.contains(time)){
+            if(!ScheduleConstants.TIME_BLOCK.contains(time.toString())){
                 throw new IllegalArgumentException(String.format("Horário %sh escolhido é inválido.", time));
             }
         });
     }
 
-    private void validateOverlapTime(LocalDate date, List<String> times){
+    private void validateOverlapTime(LocalDate date, List<LocalTime> times){
         log.event().state(ProcessState.PROCESSING).m("validateOverlapTime").param("date", date).param("times", times).info();
         var unavailableTimes = dateTimeRepository.findById(date);
         log.param("unavailableTimes", unavailableTimes).info();
