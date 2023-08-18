@@ -23,7 +23,7 @@ public class ScheduleMapper {
                 .customerName(request.getCustomerName())
                 .customerPhone(request.getCustomerPhone())
                 .date(LocalDate.parse(request.getDate(), DATE_FORMATTER))
-                .times(request.getTimes())
+                .times((request.getTimes()))
                 .services(request.getServices().stream().map(Enum::toString).toList())
                 .build();
     }
@@ -36,7 +36,7 @@ public class ScheduleMapper {
                 .customerName(schedule.getCustomerName())
                 .customerPhone(schedule.getCustomerPhone())
                 .date(schedule.getDate().toString())
-                .beginAt(schedule.getTimes().get(0))
+                .beginAt(schedule.getTimes().iterator().next())
                 .services(schedule.getServices().stream().map(ServiceType::valueOf).toList())
                 .status(schedule.getStatus())
                 .build();

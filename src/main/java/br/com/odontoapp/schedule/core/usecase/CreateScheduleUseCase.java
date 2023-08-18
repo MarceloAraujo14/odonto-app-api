@@ -4,7 +4,7 @@ import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
 import br.com.odontoapp.schedule.core.model.Schedule;
 import br.com.odontoapp.schedule.core.model.ScheduleDateTime;
 import br.com.odontoapp.schedule.core.usecase.chain.ExecutorChain;
-import br.com.odontoapp.schedule.core.usecase.validation.ValidateAfterNow;
+import br.com.odontoapp.schedule.core.usecase.validation.ValidateRequestOnValidPeriod;
 import br.com.odontoapp.schedule.core.usecase.validation.ValidateDate;
 import br.com.odontoapp.schedule.core.usecase.validation.ValidateOverlapTime;
 import br.com.odontoapp.schedule.core.usecase.validation.ValidateTime;
@@ -24,7 +24,7 @@ public class CreateScheduleUseCase {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleDateTimeRepository dateTimeRepository;
     private final ValidateDate validateDate;
-    private final ValidateAfterNow validateAfterNow;
+    private final ValidateRequestOnValidPeriod validateAfterLimitTimeRequest;
     private final ValidateTime validateTime;
     private final ValidateOverlapTime validateOverlapTime;
     private final Loggr log = new Loggr(CreateScheduleUseCase.class.getName());
@@ -45,13 +45,16 @@ public class CreateScheduleUseCase {
         return ExecutorChain.<Schedule>builder()
                 .chain(validateDate)
                 .chain(validateTime)
-                .chain(validateAfterNow)
+                .chain(validateAfterLimitTimeRequest)
                 .chain(validateOverlapTime)
                 .build();
     }
 
     private void updateDateTime(Schedule schedule){
-        dateTimeRepository.save(ScheduleDateTime.builder().date(schedule.getDate()).unavailableTimes(schedule.getTimes()).build());
+        dateTimeRepository.save(
+                ScheduleDateTime.builder()
+                        .date(schedule.getDate())
+                        .unavailableTimes(schedule.getTimes()).build());
     }
 
 }

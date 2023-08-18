@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class ValidateOverlapTime implements Executor<Schedule> {
         return input;
     }
 
-    private void validateOverlapTime(LocalDate date, List<LocalTime> times){
+    private void validateOverlapTime(LocalDate date, Set<LocalTime> times){
         log.event().state(ProcessState.PROCESSING).m("validateOverlapTime").param("date", date).param("times", times).info();
         var unavailableTimes = dateTimeRepository.findById(date);
         log.param("unavailableTimes", unavailableTimes).info();

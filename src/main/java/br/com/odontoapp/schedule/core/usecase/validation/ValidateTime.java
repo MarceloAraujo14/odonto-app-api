@@ -8,7 +8,7 @@ import br.com.odontoapp.shared.ProcessState;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class ValidateTime implements Executor<Schedule> {
@@ -21,7 +21,7 @@ public class ValidateTime implements Executor<Schedule> {
         return input;
     }
 
-    private void validateTime(List<LocalTime> times){
+    private void validateTime(Set<LocalTime> times){
         log.event().state(ProcessState.PROCESSING).m("validateTime").param("times", times).info();
 
         if(times.isEmpty()) throw new IllegalArgumentException("Escolha pelo menos um horário para agendar.");

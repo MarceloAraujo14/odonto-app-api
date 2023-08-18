@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
-public class ValidateAfterNow implements Executor<Schedule> {
+public class ValidateRequestOnValidPeriod implements Executor<Schedule> {
 
-    private final Loggr log = new Loggr(ValidateAfterNow.class.getName());
+    private final Loggr log = new Loggr(ValidateRequestOnValidPeriod.class.getName());
 
     @Override
     public Schedule execute(Schedule input) {
