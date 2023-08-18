@@ -21,4 +21,5 @@ public class ScheduleResponse {
     private int duration;
     private List<ServiceType> services;
     private ScheduleStatus status;
+    private String doctor;
 }

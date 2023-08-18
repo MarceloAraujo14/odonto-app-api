@@ -18,4 +18,5 @@ public class ScheduleRequest {
     private String date;
     private List<LocalTime> times;
     private List<ServiceType> services;
+    private String doctor;
 }

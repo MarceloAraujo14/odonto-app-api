@@ -18,6 +18,7 @@ public class ScheduleMapper {
 
     public static Schedule requestToSchedule(ScheduleRequest request){
         return Schedule.builder()
+                .doctor(request.getDoctor())
                 .customerId(request.getCustomerId())
                 .customerName(request.getCustomerName())
                 .customerPhone(request.getCustomerPhone())
@@ -30,6 +31,7 @@ public class ScheduleMapper {
     public static ScheduleResponse scheduleToResponse(Schedule schedule){
         return ScheduleResponse.builder()
                 .id(schedule.getId())
+                .doctor(schedule.getDoctor())
                 .customerId(schedule.getCustomerId())
                 .customerName(schedule.getCustomerName())
                 .customerPhone(schedule.getCustomerPhone())

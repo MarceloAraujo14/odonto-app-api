@@ -54,6 +54,8 @@ public class Schedule {
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private ScheduleStatus status;
+    @Column(name = "doctor")
+    private String doctor;
 
     public LocalTime getBeginAt(){
         return this.times.get(0);
