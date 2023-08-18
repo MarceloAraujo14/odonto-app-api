@@ -4,7 +4,7 @@ import br.com.odontoapp.schedule.api.mapper.ScheduleMapper;
 import br.com.odontoapp.schedule.api.request.ScheduleRequest;
 import br.com.odontoapp.schedule.api.response.ScheduleResponse;
 import br.com.odontoapp.schedule.core.model.Schedule;
-import br.com.odontoapp.schedule.core.usecase.CreateScheduleUseCase;
+import br.com.odontoapp.schedule.core.usecase.schedule.CreateScheduleUseCase;
 import br.com.odontoapp.schedule.repository.ScheduleRepository;
 import br.com.odontoapp.shared.Loggr;
 import br.com.odontoapp.shared.ProcessState;

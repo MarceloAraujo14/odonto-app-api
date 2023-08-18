@@ -1,13 +1,14 @@
-package br.com.odontoapp.schedule.core.usecase;
+package br.com.odontoapp.schedule.core.usecase.schedule;
 
 import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
 import br.com.odontoapp.schedule.core.model.Schedule;
 import br.com.odontoapp.schedule.core.model.ScheduleDateTime;
 import br.com.odontoapp.schedule.core.usecase.chain.ExecutorChain;
-import br.com.odontoapp.schedule.core.usecase.validation.ValidateRequestOnValidPeriod;
-import br.com.odontoapp.schedule.core.usecase.validation.ValidateDate;
-import br.com.odontoapp.schedule.core.usecase.validation.ValidateOverlapTime;
-import br.com.odontoapp.schedule.core.usecase.validation.ValidateTime;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateHoliday;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateRequestOnValidPeriod;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateDate;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateOverlapTime;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateTime;
 import br.com.odontoapp.schedule.repository.ScheduleDateTimeRepository;
 import br.com.odontoapp.schedule.repository.ScheduleRepository;
 import br.com.odontoapp.shared.Loggr;
@@ -27,6 +28,7 @@ public class CreateScheduleUseCase {
     private final ValidateRequestOnValidPeriod validateAfterLimitTimeRequest;
     private final ValidateTime validateTime;
     private final ValidateOverlapTime validateOverlapTime;
+    private final ValidateHoliday validateHoliday;
     private final Loggr log = new Loggr(CreateScheduleUseCase.class.getName());
 
     public Schedule execute(Schedule schedule){
@@ -44,6 +46,7 @@ public class CreateScheduleUseCase {
     private ExecutorChain<Schedule> validate(){
         return ExecutorChain.<Schedule>builder()
                 .chain(validateDate)
+                .chain(validateHoliday)
                 .chain(validateTime)
                 .chain(validateAfterLimitTimeRequest)
                 .chain(validateOverlapTime)
