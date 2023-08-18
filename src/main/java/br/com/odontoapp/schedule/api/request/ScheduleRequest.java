@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalTime;
 import java.util.List;
+import java.util.TreeSet;
 
 @Data
 @Builder
@@ -15,6 +17,7 @@ public class ScheduleRequest {
     private String customerPhone;
     @DateTimeFormat(pattern = "dd/MM/yyyy", fallbackPatterns = "yyyy/MM/dd")
     private String date;
-    private List<String> times;
+    private TreeSet<LocalTime> times;
     private List<ServiceType> services;
+    private String doctor;
 }

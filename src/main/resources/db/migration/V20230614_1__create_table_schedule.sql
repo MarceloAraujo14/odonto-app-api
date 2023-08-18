@@ -4,7 +4,7 @@ CREATE TABLE if not exists schedule (
    customer_name VARCHAR(50),
    customer_phone VARCHAR(20),
    date date,
-   times TEXT[],
+   times time[],
    services TEXT[],
    status VARCHAR(20),
    CONSTRAINT pk_schedule PRIMARY KEY (schedule_id)

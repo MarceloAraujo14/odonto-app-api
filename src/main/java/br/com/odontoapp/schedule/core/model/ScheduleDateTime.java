@@ -13,8 +13,9 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class ScheduleDateTime {
     @Id
     private LocalDate date;
     @Column(name = "unavailable_times")
-    private List<String> unavailableTimes;
+    private Set<LocalTime> unavailableTimes;
 
     @Override
     public boolean equals(Object o) {
