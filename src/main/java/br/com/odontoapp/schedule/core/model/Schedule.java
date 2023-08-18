@@ -55,4 +55,8 @@ public class Schedule {
     @Enumerated(value = EnumType.STRING)
     private ScheduleStatus status;
 
+    public LocalTime getBeginAt(){
+        return this.times.get(0);
+    }
+
 }
