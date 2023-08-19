@@ -1,11 +1,11 @@
 package br.com.odontoapp.schedule.core.usecase.schedule;
 
 import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
-import br.com.odontoapp.schedule.core.model.Schedule;
-import br.com.odontoapp.schedule.core.model.ScheduleDateTime;
+import br.com.odontoapp.schedule.core.domain.Schedule;
+import br.com.odontoapp.schedule.core.domain.ScheduleDateTime;
 import br.com.odontoapp.schedule.core.usecase.chain.ExecutorChain;
 import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateHoliday;
-import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateRequestOnValidPeriod;
+import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateBeginAtPeriod;
 import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateDate;
 import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateOverlapTime;
 import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateTime;
@@ -25,7 +25,7 @@ public class CreateScheduleUseCase {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleDateTimeRepository dateTimeRepository;
     private final ValidateDate validateDate;
-    private final ValidateRequestOnValidPeriod validateAfterLimitTimeRequest;
+    private final ValidateBeginAtPeriod validateAfterLimitTimeRequest;
     private final ValidateTime validateTime;
     private final ValidateOverlapTime validateOverlapTime;
     private final ValidateHoliday validateHoliday;

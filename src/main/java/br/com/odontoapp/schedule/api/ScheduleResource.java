@@ -3,7 +3,7 @@ package br.com.odontoapp.schedule.api;
 import br.com.odontoapp.schedule.api.mapper.ScheduleMapper;
 import br.com.odontoapp.schedule.api.request.ScheduleRequest;
 import br.com.odontoapp.schedule.api.response.ScheduleResponse;
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import br.com.odontoapp.schedule.core.usecase.schedule.CreateScheduleUseCase;
 import br.com.odontoapp.schedule.repository.ScheduleRepository;
 import br.com.odontoapp.shared.Loggr;

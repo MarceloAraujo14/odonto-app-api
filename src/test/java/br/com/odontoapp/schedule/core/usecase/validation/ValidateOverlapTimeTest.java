@@ -1,6 +1,6 @@
 package br.com.odontoapp.schedule.core.usecase.validation;
 
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateOverlapTime;
 import br.com.odontoapp.schedule.repository.ScheduleDateTimeRepository;
 import org.junit.jupiter.api.extension.ExtendWith;

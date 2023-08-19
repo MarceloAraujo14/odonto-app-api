@@ -1,4 +1,4 @@
-package br.com.odontoapp.schedule.core.model;
+package br.com.odontoapp.schedule.core.domain;
 
 import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
 import jakarta.persistence.Column;

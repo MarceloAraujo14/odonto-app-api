@@ -1,7 +1,6 @@
-package br.com.odontoapp.schedule.core.usecase.validation;
+package br.com.odontoapp.schedule.core.usecase.schedule.validation;
 
-import br.com.odontoapp.schedule.core.model.Schedule;
-import br.com.odontoapp.schedule.core.usecase.schedule.validation.ValidateRequestOnValidPeriod;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class ValidateRequestOnValidPeriodTest {
+class ValidateBeginAtPeriodTest {
 
     @InjectMocks
-    ValidateRequestOnValidPeriod validateAfterLimitTimeRequest;
+    ValidateBeginAtPeriod validateAfterLimitTimeRequest;
 
     @Test
     void should_do_nothing_when_request_time_is_after_1_hour_from_now(){

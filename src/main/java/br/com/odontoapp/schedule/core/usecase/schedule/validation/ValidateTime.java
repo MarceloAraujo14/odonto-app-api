@@ -2,7 +2,7 @@ package br.com.odontoapp.schedule.core.usecase.schedule.validation;
 
 import br.com.odontoapp.schedule.core.constants.ScheduleConstants;
 import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import br.com.odontoapp.schedule.core.usecase.chain.Executor;
 import br.com.odontoapp.shared.Loggr;
 import br.com.odontoapp.shared.ProcessState;

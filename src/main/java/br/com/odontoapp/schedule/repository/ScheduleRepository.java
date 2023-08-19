@@ -1,6 +1,6 @@
 package br.com.odontoapp.schedule.repository;
 
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

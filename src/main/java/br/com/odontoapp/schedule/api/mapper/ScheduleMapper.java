@@ -3,7 +3,7 @@ package br.com.odontoapp.schedule.api.mapper;
 import br.com.odontoapp.schedule.api.request.ScheduleRequest;
 import br.com.odontoapp.schedule.api.response.ScheduleResponse;
 import br.com.odontoapp.schedule.core.enums.ServiceType;
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

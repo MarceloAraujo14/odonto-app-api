@@ -1,4 +1,4 @@
-package br.com.odontoapp.schedule.core.model;
+package br.com.odontoapp.schedule.core.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

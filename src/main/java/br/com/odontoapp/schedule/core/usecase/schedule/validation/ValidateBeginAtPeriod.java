@@ -1,7 +1,7 @@
 package br.com.odontoapp.schedule.core.usecase.schedule.validation;
 
 import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
-import br.com.odontoapp.schedule.core.model.Schedule;
+import br.com.odontoapp.schedule.core.domain.Schedule;
 import br.com.odontoapp.schedule.core.usecase.chain.Executor;
 import br.com.odontoapp.shared.Loggr;
 import br.com.odontoapp.shared.ProcessState;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class ValidateRequestOnValidPeriod implements Executor<Schedule> {
+public class ValidateBeginAtPeriod implements Executor<Schedule> {
 
-    private final Loggr log = new Loggr(ValidateRequestOnValidPeriod.class.getName());
+    private final Loggr log = new Loggr(ValidateBeginAtPeriod.class.getName());
 
     @Override
     public Schedule execute(Schedule input) {
