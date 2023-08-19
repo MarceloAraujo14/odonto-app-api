@@ -23,3 +23,7 @@ spring:
 springdoc:
   swagger-ui:
     path: "/schedule/swagger-ui.html"
+
+holiday-api:
+  url: "https://api.invertexto.com/v1/holidays/"
+  token: "${holiday-api-token}"

@@ -1,12 +1,11 @@
-package br.com.odontoapp.schedule.core.usecase.validation;
+package br.com.odontoapp.schedule.core.usecase.schedule.validation;
 
+import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
 import br.com.odontoapp.schedule.core.model.Schedule;
 import br.com.odontoapp.schedule.core.usecase.chain.Executor;
 import br.com.odontoapp.shared.Loggr;
 import br.com.odontoapp.shared.ProcessState;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 
 @Component
 public class ValidateDate implements Executor<Schedule> {
@@ -15,15 +14,15 @@ public class ValidateDate implements Executor<Schedule> {
 
     @Override
     public Schedule execute(Schedule input) {
-        validateDate(input.getDate());
+        validateDate(input);
         return input;
     }
 
-    private void validateDate(LocalDate date){
-        log.event().state(ProcessState.PROCESSING).m("validateDate").param("date", date).info();
-        if(date.getDayOfWeek().getValue() == 7){
+    private void validateDate(Schedule input){
+        log.event().state(ProcessState.PROCESSING).m("validateDate").param("date", input.getDate()).info();
+        if(input.getDate().getDayOfWeek().getValue() == 7){
+            input.setStatus(ScheduleStatus.FALHA);
             throw new IllegalArgumentException("Não é possível agendar horários aos domingos.");
         }
-        //todo: validate holiday
     }
 }

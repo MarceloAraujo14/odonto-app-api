@@ -1,14 +1,12 @@
-package br.com.odontoapp.schedule.core.usecase.validation;
+package br.com.odontoapp.schedule.core.usecase.schedule.validation;
 
 import br.com.odontoapp.schedule.core.constants.ScheduleConstants;
+import br.com.odontoapp.schedule.core.enums.ScheduleStatus;
 import br.com.odontoapp.schedule.core.model.Schedule;
 import br.com.odontoapp.schedule.core.usecase.chain.Executor;
 import br.com.odontoapp.shared.Loggr;
 import br.com.odontoapp.shared.ProcessState;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalTime;
-import java.util.Set;
 
 @Component
 public class ValidateTime implements Executor<Schedule> {
@@ -17,17 +15,21 @@ public class ValidateTime implements Executor<Schedule> {
 
     @Override
     public Schedule execute(Schedule input) {
-        validateTime(input.getTimes());
+        validateTime(input);
         return input;
     }
 
-    private void validateTime(Set<LocalTime> times){
-        log.event().state(ProcessState.PROCESSING).m("validateTime").param("times", times).info();
+    private void validateTime(Schedule input){
+        log.event().state(ProcessState.PROCESSING).m("validateTime").param("times", input.getTimes()).info();
 
-        if(times.isEmpty()) throw new IllegalArgumentException("Escolha pelo menos um horário para agendar.");
+        if(input.getTimes().isEmpty()) {
+            input.setStatus(ScheduleStatus.FALHA);
+            throw new IllegalArgumentException("Escolha pelo menos um horário para agendar.");
+        }
 
-        times.forEach(time -> {
+        input.getTimes().forEach(time -> {
             if(!ScheduleConstants.TIME_BLOCK.contains(time.toString())){
+                input.setStatus(ScheduleStatus.FALHA);
                 throw new IllegalArgumentException(String.format("Horário %sh escolhido é inválido.", time));
             }
         });
